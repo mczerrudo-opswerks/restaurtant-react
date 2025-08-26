@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'rest_framework',  # Django REST Framework
     'django_extensions',  # Optional: for additional management commands
     'silk',
-    "corsheaders", # Installed with django-cors-headers
+    'corsheaders', # Installed with django-cors-headers
+    'django_filters', # Optional: for filtering support
 ]
 
 MIDDLEWARE = [
@@ -147,6 +148,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Django REST Framework settings Authentication
 REST_FRAMEWORK = {
+    "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication', # JWT Authentication from djangorestframework-simplejwt
         'rest_framework.authentication.SessionAuthentication',

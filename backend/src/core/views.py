@@ -14,6 +14,8 @@ from core.serializers import (
 from rest_framework import permissions
 from core.tasks import send_order_created_email
 from rest_framework.exceptions import PermissionDenied
+from core.filters import MenuItemFilter
+from django_filters.rest_framework import DjangoFilterBackend
 
 logger = logging.getLogger('restaurantAPI')
 
@@ -27,6 +29,14 @@ class MenuItemListCreateAPIView(generics.ListCreateAPIView):
     queryset = MenuItem.objects.order_by('pk').select_related("restaurant")
     serializer_class = MenuItemSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    filterset_class = MenuItemFilter
+    filter_backends = [
+        DjangoFilterBackend, 
+        filters.SearchFilter,
+        filters.OrderingFilter,
+    ]
+    search_fields = ["name",]
+    ordering_fields = ["price", "name"]
 
     # Caching 
     @method_decorator(cache_page(60 * 15, key_prefix = 'menu_list')) # connected with signals.py
@@ -34,8 +44,8 @@ class MenuItemListCreateAPIView(generics.ListCreateAPIView):
         return super().list(request, *args, **kwargs)
     
     def get_queryset(self):
-        import time
-        time.sleep(2)
+        # import time
+        # time.sleep(2)
         return super().get_queryset()
     
     def perform_create(self, serializer):

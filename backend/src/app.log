@@ -2929,3 +2929,183 @@ Traceback (most recent call last):
     ...<2 lines>...
     )
 rest_framework.exceptions.AuthenticationFailed: No active account found with the given credentials
+[ERROR] 2025-08-26 17:03:00,586 restaurantAPI Unhandled exception in view=RestaurantViewSet user=None path=/restaurants/ payload={}
+Traceback (most recent call last):
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework\views.py", line 497, in dispatch
+    self.initial(request, *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework\views.py", line 414, in initial
+    self.perform_authentication(request)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework\views.py", line 324, in perform_authentication
+    request.user
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework\request.py", line 231, in user
+    self._authenticate()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework\request.py", line 384, in _authenticate
+    user_auth_tuple = authenticator.authenticate(self)
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework_simplejwt\authentication.py", line 49, in authenticate
+    validated_token = self.get_validated_token(raw_token)
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework_simplejwt\authentication.py", line 113, in get_validated_token
+    raise InvalidToken(
+    ...<4 lines>...
+    )
+rest_framework_simplejwt.exceptions.InvalidToken: {'detail': ErrorDetail(string='Given token not valid for any token type', code='token_not_valid'), 'code': ErrorDetail(string='token_not_valid', code='token_not_valid'), 'messages': [{'token_class': ErrorDetail(string='AccessToken', code='token_not_valid'), 'token_type': ErrorDetail(string='access', code='token_not_valid'), 'message': ErrorDetail(string='Token is expired', code='token_not_valid')}]}
+[ERROR] 2025-08-26 17:03:00,655 restaurantAPI Unhandled exception in view=RestaurantViewSet user=None path=/restaurants/ payload={}
+Traceback (most recent call last):
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework\views.py", line 497, in dispatch
+    self.initial(request, *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework\views.py", line 414, in initial
+    self.perform_authentication(request)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework\views.py", line 324, in perform_authentication
+    request.user
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework\request.py", line 231, in user
+    self._authenticate()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework\request.py", line 384, in _authenticate
+    user_auth_tuple = authenticator.authenticate(self)
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework_simplejwt\authentication.py", line 49, in authenticate
+    validated_token = self.get_validated_token(raw_token)
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework_simplejwt\authentication.py", line 113, in get_validated_token
+    raise InvalidToken(
+    ...<4 lines>...
+    )
+rest_framework_simplejwt.exceptions.InvalidToken: {'detail': ErrorDetail(string='Given token not valid for any token type', code='token_not_valid'), 'code': ErrorDetail(string='token_not_valid', code='token_not_valid'), 'messages': [{'token_class': ErrorDetail(string='AccessToken', code='token_not_valid'), 'token_type': ErrorDetail(string='access', code='token_not_valid'), 'message': ErrorDetail(string='Token is expired', code='token_not_valid')}]}
+[ERROR] 2025-08-26 17:03:02,190 restaurantAPI Unhandled exception in view=RestaurantViewSet user=None path=/restaurants/ payload={}
+Traceback (most recent call last):
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework\views.py", line 497, in dispatch
+    self.initial(request, *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework\views.py", line 414, in initial
+    self.perform_authentication(request)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework\views.py", line 324, in perform_authentication
+    request.user
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework\request.py", line 231, in user
+    self._authenticate()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework\request.py", line 384, in _authenticate
+    user_auth_tuple = authenticator.authenticate(self)
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework_simplejwt\authentication.py", line 49, in authenticate
+    validated_token = self.get_validated_token(raw_token)
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework_simplejwt\authentication.py", line 113, in get_validated_token
+    raise InvalidToken(
+    ...<4 lines>...
+    )
+rest_framework_simplejwt.exceptions.InvalidToken: {'detail': ErrorDetail(string='Given token not valid for any token type', code='token_not_valid'), 'code': ErrorDetail(string='token_not_valid', code='token_not_valid'), 'messages': [{'token_class': ErrorDetail(string='AccessToken', code='token_not_valid'), 'token_type': ErrorDetail(string='access', code='token_not_valid'), 'message': ErrorDetail(string='Token is expired', code='token_not_valid')}]}
+[ERROR] 2025-08-26 17:03:02,251 restaurantAPI Unhandled exception in view=RestaurantViewSet user=None path=/restaurants/ payload={}
+Traceback (most recent call last):
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework\views.py", line 497, in dispatch
+    self.initial(request, *args, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework\views.py", line 414, in initial
+    self.perform_authentication(request)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework\views.py", line 324, in perform_authentication
+    request.user
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework\request.py", line 231, in user
+    self._authenticate()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework\request.py", line 384, in _authenticate
+    user_auth_tuple = authenticator.authenticate(self)
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework_simplejwt\authentication.py", line 49, in authenticate
+    validated_token = self.get_validated_token(raw_token)
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework_simplejwt\authentication.py", line 113, in get_validated_token
+    raise InvalidToken(
+    ...<4 lines>...
+    )
+rest_framework_simplejwt.exceptions.InvalidToken: {'detail': ErrorDetail(string='Given token not valid for any token type', code='token_not_valid'), 'code': ErrorDetail(string='token_not_valid', code='token_not_valid'), 'messages': [{'token_class': ErrorDetail(string='AccessToken', code='token_not_valid'), 'token_type': ErrorDetail(string='access', code='token_not_valid'), 'message': ErrorDetail(string='Token is expired', code='token_not_valid')}]}
+[ERROR] 2025-08-26 17:40:11,942 django.request Internal Server Error: /menu_item/
+Traceback (most recent call last):
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework\response.py", line 74, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework\renderers.py", line 727, in render
+    context = self.get_context(data, accepted_media_type, renderer_context)
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework\renderers.py", line 705, in get_context
+    'filter_form': self.get_filter_form(data, view, request),
+                   ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework\renderers.py", line 637, in get_filter_form
+    html = backend().to_html(request, queryset, view)
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\django_filters\rest_framework\backends.py", line 79, in to_html
+    template = loader.get_template(self.template)
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: django_filters/rest_framework/form.html
+[ERROR] 2025-08-26 17:42:15,286 django.request Internal Server Error: /menu_item/
+Traceback (most recent call last):
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework\response.py", line 74, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework\renderers.py", line 727, in render
+    context = self.get_context(data, accepted_media_type, renderer_context)
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework\renderers.py", line 705, in get_context
+    'filter_form': self.get_filter_form(data, view, request),
+                   ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework\renderers.py", line 637, in get_filter_form
+    html = backend().to_html(request, queryset, view)
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\django_filters\rest_framework\backends.py", line 79, in to_html
+    template = loader.get_template(self.template)
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: django_filters/rest_framework/form.html
+[ERROR] 2025-08-26 17:43:23,156 django.request Internal Server Error: /menu_item/
+Traceback (most recent call last):
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework\response.py", line 74, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework\renderers.py", line 727, in render
+    context = self.get_context(data, accepted_media_type, renderer_context)
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework\renderers.py", line 705, in get_context
+    'filter_form': self.get_filter_form(data, view, request),
+                   ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework\renderers.py", line 637, in get_filter_form
+    html = backend().to_html(request, queryset, view)
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\django_filters\rest_framework\backends.py", line 79, in to_html
+    template = loader.get_template(self.template)
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: django_filters/rest_framework/form.html
+[ERROR] 2025-08-26 17:46:01,045 restaurantAPI Unhandled exception in view=MenuItemListCreateAPIView user=None path=/menu_item/ payload={}
+Traceback (most recent call last):
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework\generics.py", line 243, in get
+    return self.list(request, *args, **kwargs)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\django\utils\decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\django\utils\decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\src\core\views.py", line 44, in list
+    return super().list(request, *args, **kwargs)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework\mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\rest_framework\generics.py", line 154, in filter_queryset
+    queryset = backend().filter_queryset(self.request, queryset, self)
+  File "C:\Users\Mc\Documents\OPSWERKS\react_restaurant\backend\venv-drf\Lib\site-packages\django_filters\rest_framework\backends.py", line 71, in filter_queryset
+    raise utils.translate_validation(filterset.errors)
+rest_framework.exceptions.ValidationError: {'restaurant': [ErrorDetail(string='Select a valid choice. That choice is not one of the available choices.', code='invalid_choice')]}
