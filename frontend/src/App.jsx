@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate, Outlet } from "react-router-dom
 import { AuthProvider, useAuth } from "./context/AuthContext";
 
 // Pages
-import LoginPage from "./pages/LoginPage";
+import {LoginPage, RestaurantsPage, MenuPage} from "./Routes.js";
 // (Add these when ready)
 // import RestaurantsPage from "./pages/RestaurantsPage";
 // import MenuPage from "./pages/MenuPage";
@@ -36,7 +36,8 @@ export default function App() {
 
           {/* Protected area */}
           <Route element={<Protected />}>
-             <Route path="/" element={<div className="p-6">Home (protected)</div>} />
+             <Route path="/" element={<RestaurantsPage />} />
+             <Route path="/menu" element={<MenuPage />} />
           </Route>
 
           {/* Fallback */}
