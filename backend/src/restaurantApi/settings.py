@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'silk',
     'corsheaders', # Installed with django-cors-headers
     'django_filters', # Optional: for filtering support
+    'drf_spectacular', # Optional: for OpenAPI schema generation
 ]
 
 MIDDLEWARE = [
@@ -103,6 +104,16 @@ DATABASES = {
 
 CORS_ALLOWED_ORIGINS = env.list("CORS_ALLOWED_ORIGINS", default=[])
 
+# drf-spectacular settings
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'E-commerce API',
+    'DESCRIPTION': 'API for E-commerce platform',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # OTHER SETTINGS
+}
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -149,6 +160,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Django REST Framework settings Authentication
 REST_FRAMEWORK = {
     "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema', # Use drf-spectacular for OpenAPI schema generation
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication', # JWT Authentication from djangorestframework-simplejwt
         'rest_framework.authentication.SessionAuthentication',

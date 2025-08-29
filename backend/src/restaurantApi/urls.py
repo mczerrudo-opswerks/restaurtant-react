@@ -20,6 +20,7 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,4 +28,8 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'), # JWT Authentication
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'), # JWT Authentication
     path('silk/', include('silk.urls', namespace='silk')),  # Optional: for better admin interface django-silk
+    
+    path('api/schema/', SpectacularAPIView.as_view(), name='schema'), # OpenAPI schema downloads a yaml file
+    path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(), name='swagger-ui'), # Swagger UI
+    path('api/schema/redoc/', SpectacularRedocView.as_view(), name='redoc'), # ReDoc
 ]

@@ -3,24 +3,31 @@ from django.utils.decorators import method_decorator
 from django.shortcuts import render
 from rest_framework import filters, generics, viewsets
 from django.views.decorators.cache import cache_page
-from core.models import Restaurant, MenuItem, Order, OrderItem, Review
+from core.models import Restaurant, MenuItem, Order, OrderItem, Review, User
 from core.serializers import (
     MenuItemSerializer,
     RestaurantSerializer,
     OrderCreateSerializer,
     OrderSerializer,
-    ReviewSerializer
+    ReviewSerializer,
+    UserSerializer,
 )
 from rest_framework import permissions
 from core.tasks import send_order_created_email
 from rest_framework.exceptions import PermissionDenied
-from core.filters import MenuItemFilter
+from core.filters import MenuItemFilter, RestaurantFilter, OrderFilter
 from django_filters.rest_framework import DjangoFilterBackend
+from core.permissions import IsOwnerOrReadOnly, IsCurrentUser
 
 logger = logging.getLogger('restaurantAPI')
 
 
 # Create your views here.
+
+class UserRetrieveAPIView(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [IsCurrentUser]
 
 class MenuItemListCreateAPIView(generics.ListCreateAPIView):
     """
@@ -65,23 +72,42 @@ class MenuItemRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView
 
     def get_permissions(self):
         if self.request.method in ['PUT','PATCH', 'DELETE']:
-            self.permission_classes = [permissions.IsAdminUser]
+            self.permission_classes = [IsOwnerOrReadOnly]
         return super().get_permissions()
 
 class RestaurantViewSet(viewsets.ModelViewSet):
     queryset = Restaurant.objects.all()
     serializer_class = RestaurantSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
+    filterset_class = RestaurantFilter
+    filter_backends = [
+        DjangoFilterBackend, 
+        filters.SearchFilter,
+        filters.OrderingFilter,
+    ]
     search_fields = ["name"]
     ordering_fields = ["name"]
 
     def perform_create(self, serializer):
         restaurant = serializer.save(owner=self.request.user)
         logger.info(f"Restaurant created: {restaurant.name} by {self.request.user}")
+    
+    def get_permissions(self):
+        if self.request.method in ['PUT','PATCH', 'DELETE']:
+            self.permission_classes = [IsOwnerOrReadOnly]
+        return super().get_permissions()
 
 class OrderViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = OrderSerializer
+    filterset_class = OrderFilter
+    filter_backends = [
+        DjangoFilterBackend, 
+        filters.SearchFilter,
+        filters.OrderingFilter,
+    ]
+    search_fields = ["name"]
+    ordering_fields = ["created_at"]
     def get_queryset(self):
         return Order.objects.filter(user=self.request.user).select_related("restaurant", "user").prefetch_related("items__menu_item")   
     

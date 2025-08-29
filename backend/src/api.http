@@ -8,12 +8,15 @@ Content-Type: application/json
     "password": "pass1234"
 }
 
+###
+GET http://localhost:8000/user/5/ HTTP/1.1
+Host: localhost:8000
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU2NDUzMTcwLCJpYXQiOjE3NTY0NDk1NzAsImp0aSI6ImUyOWI1ODBiZWMxMjQ3NzBiZTgzOWY3MWUwNDVmZWVjIiwidXNlcl9pZCI6IjUifQ.i1jZK-Bl1oko7-2rRCkgaBQSaQ9jWQkfo4JTqJP3WPg
 
 ### Get Order
 GET http://localhost:8000/orders/ HTTP/1.1
 Host: localhost:8000
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU1MjUwNzkwLCJpYXQiOjE3NTUyNDcxOTAsImp0aSI6IjUxN2YwZGI3ODA4NjQyYzJhZTYzZWEzYTE1ZmVlODc4IiwidXNlcl9pZCI6IjUifQ.Phtj6rBxS61oA-kylkrcyi-p1k5UrOnmfDLC0icWYF4
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU2NDM5NTY0LCJpYXQiOjE3NTY0MzU5NjQsImp0aSI6ImRlYjhkMmEwMjNiNjQyODlhN2RjYTllMzVhMTAxMDIxIiwidXNlcl9pZCI6IjUifQ.cdqa16CXQmj2gMC8B3YiMpG0gRzSXLR-nXA44929_h8
 ### Create an Order
 POST http://localhost:8000/orders/ HTTP/1.1
 Content-Type: application/json

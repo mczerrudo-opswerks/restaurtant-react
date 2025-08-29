@@ -13,6 +13,14 @@ export async function api(path, { method = "GET", body, token } = {}) {
   const text = await res.text();
   const data = text ? JSON.parse(text) : null;
 
-  if (!res.ok) throw { status: res.status, data };
+   if (!res.ok) {
+    if (res.status === 401) {
+      // clear auth state
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+    }
+    throw { status: res.status, data };
+  }
+
   return data;
 }

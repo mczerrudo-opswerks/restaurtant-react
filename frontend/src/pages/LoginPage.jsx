@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify"
+
 
 export default function LoginPage() {
+  const navigate = useNavigate();
   const { login } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -14,7 +18,8 @@ export default function LoginPage() {
     setError("");
     try {
       await login(username, password);
-      alert("Login successful!");
+      toast.success("Login successful!");
+      navigate("/");
     } catch (err) {
       setError(err?.data?.detail || "Login failed");
     } finally {

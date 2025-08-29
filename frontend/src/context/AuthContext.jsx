@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 import { api } from "../api/client";
+import {jwtDecode} from "jwt-decode";
 
 const AuthCtx = createContext(null);
 export function useAuth() {
@@ -13,6 +14,15 @@ export function AuthProvider({ children }) {
     return u ? JSON.parse(u) : null;
   });
 
+  const getUserIdFromToken = (token) => {
+    try {
+      const decoded = jwtDecode(token);
+      return decoded.user_id ?? decoded.userId ?? decoded.sub ?? null;
+    } catch {
+      return null;
+    }
+  };
+
   const login = async (username, password) => {
     const data = await api("/api/token/", {
       method: "POST",
@@ -21,9 +31,11 @@ export function AuthProvider({ children }) {
     setToken(data.access);
     localStorage.setItem("token", data.access);
 
-    const u = { username };
+    const u = await api(`/user/${getUserIdFromToken(data.access)}`, { token: data.access });
     setUser(u);
     localStorage.setItem("user", JSON.stringify(u));
+
+    
   };
 
   const logout = () => {
@@ -34,7 +46,7 @@ export function AuthProvider({ children }) {
   };
 
   return (
-    <AuthCtx.Provider value={{ token, user, login, logout }}>
+    <AuthCtx.Provider value={{ token, user, login, logout, getUserIdFromToken}}>
       {children}
     </AuthCtx.Provider>
   );

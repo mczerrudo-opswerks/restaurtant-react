@@ -2,6 +2,15 @@ from decimal import Decimal
 from rest_framework import serializers
 from core.models import Restaurant, MenuItem, Order, OrderItem, Review
 from django.db import transaction
+from django.contrib.auth import get_user_model
+
+
+User = get_user_model()
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ("id", "username", "email", "is_restaurant_owner")
 
 class MenuItemSerializer(serializers.ModelSerializer):
     # SerializerMethodField is read-only
@@ -15,9 +24,11 @@ class MenuItemSerializer(serializers.ModelSerializer):
         return obj.restaurant.name
     
 class RestaurantSerializer(serializers.ModelSerializer):
+
+    owner_name = serializers.CharField(source='owner.username', read_only=True)
     class Meta:
         model = Restaurant
-        fields = ("id","name","address","owner","created_at")
+        fields = ("id","name","address","owner","owner_name","created_at",)
         extra_kwargs = {
             'owner': {'read_only': True}
         }

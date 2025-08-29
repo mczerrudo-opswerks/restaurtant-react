@@ -5,6 +5,7 @@ from rest_framework.routers import DefaultRouter
 urlpatterns = [
     path('menu_item/', views.MenuItemListCreateAPIView.as_view(), name='menu-item'),
     path('menu_item/<int:menu_id>/', views.MenuItemRetrieveUpdateDestroyAPIView.as_view(), name='menu-detail'),
+    path('user/<int:pk>/', views.UserRetrieveAPIView.as_view(), name='current-user'),
 ]
 
 router = DefaultRouter()
