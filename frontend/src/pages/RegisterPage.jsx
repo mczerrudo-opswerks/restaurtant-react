@@ -1,21 +1,15 @@
-// src/pages/RegisterPage.jsx
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { api } from "../api/client";
 import { useAuth } from "../context/AuthContext";
 import { register } from "../api/customer";
 import { toast } from "react-toastify";
 
 /**
- * RegisterPage
- * Backend expectation: POST /user/
  * Body: {
  *   username, email, first_name, last_name, password, password2
  * }
- * Returns: newly created user or a success message.
- *
- * On success we optionally auto-login using the same credentials.
- */
+ **/
+
 export default function RegisterPage() {
   const navigate = useNavigate();
   const { login, token } = useAuth();
@@ -39,6 +33,8 @@ export default function RegisterPage() {
 
   const validateLocal = () => {
     const e = {};
+    if(!values.first_name) e.first_name = ["This field is required."];
+    if(!values.last_name) e.last_name = ["This field is required."];
     if (!values.username) e.username = ["This field is required."];
     if (!values.email) e.email = ["This field is required."];
     if (!values.password) e.password = ["This field is required."];
@@ -53,6 +49,7 @@ export default function RegisterPage() {
     setNonFieldError("");
 
     const local = validateLocal();
+    // Check if the local has entry it goes back and shows the error
     if (Object.keys(local).length) {
       setErrors(local);
       return;
@@ -62,7 +59,7 @@ export default function RegisterPage() {
     try {
       const res = await register(values, token);
       // Auto-login with the same credentials
-      toast.success("Registration successful! Logging you in…", {
+      toast.success(`Registration successful! Hi ${values.username} Logging you in…`, {
         autoClose: 2000,
       });
       await login(values.username, values.password);
@@ -133,7 +130,6 @@ export default function RegisterPage() {
               className="w-full border rounded px-3 py-2"
               value={values.username}
               onChange={onChange}
-              required
             />
             <FieldError name="username" />
           </div>
@@ -146,7 +142,6 @@ export default function RegisterPage() {
               className="w-full border rounded px-3 py-2"
               value={values.email}
               onChange={onChange}
-              required
             />
             <FieldError name="email" />
           </div>
@@ -159,7 +154,6 @@ export default function RegisterPage() {
               className="w-full border rounded px-3 py-2"
               value={values.password}
               onChange={onChange}
-              required
             />
             <FieldError name="password" />
           </div>
@@ -172,7 +166,6 @@ export default function RegisterPage() {
               className="w-full border rounded px-3 py-2"
               value={values.password2}
               onChange={onChange}
-              required
             />
             <FieldError name="password2" />
           </div>
