@@ -24,9 +24,10 @@ import {
   OwnerLayout,
   OwnerRestaurant,
   CartPage,
-  RegisterPage
+  RegisterPage,
+  ProtectedLayout,
 } from "./Routes.js";
-import { useNavigate } from "react-router-dom";
+
 // (Add these when ready)
 // import RestaurantsPage from "./pages/RestaurantsPage";
 // import MenuPage from "./pages/MenuPage";
@@ -36,37 +37,7 @@ import { useNavigate } from "react-router-dom";
 // import TopBar from "./components/TopBar";
 // import CheckoutBar from "./components/CheckoutBar";
 
-function Protected() {
-  const navigate = useNavigate();
-  const { token } = useAuth();
-  const { items, restaurant, singleRestaurant } = useCart();
 
-  if (!token) return <Navigate to="/login" replace />;
-
-  const handleCheckout = async () => {
-    if (!singleRestaurant || items.length === 0) {
-      throw "Cart must contain items from a single restaurant.";
-    }
-    // const payload = {
-    //   restaurant,
-    //   items: items.map((i) => ({ menu_item: i.id, quantity: i.qty })),
-    // };
-    // // POST /orders/
-    // const res = await api("/orders/", { method: "POST", body: payload, token });
-    // // Optionally: return res for a toast/snackbar in CheckoutBar
-    // return res;
-    navigate("/cart", { replace: true });
-
-  };
-
-  return (
-    <div className="min-h-screen pb-20">
-      <TopBar />
-      <Outlet />
-      <CheckoutBar onCheckout={handleCheckout} />
-    </div>
-  );
-}
 
 export default function App() {
   return (
@@ -79,7 +50,7 @@ export default function App() {
             <Route path="/register" element={<RegisterPage />} />
 
             {/* Protected area */}
-            <Route element={<Protected />}>
+            <Route element={<ProtectedLayout />}>
               <Route path="/" element={<RestaurantsPage />} />
               <Route path="/menu" element={<MenuPage />} />
               <Route path="/orders" element={<OrdersPage />} />
