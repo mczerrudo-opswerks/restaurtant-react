@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useCart } from "../context/CartContext"; // assumes you already have this
 import { createOrder } from "../api/customer";
-import { api } from "../api/client";
+import { toast } from "react-toastify";
+
 
 export default function CartPage() {
   const navigate = useNavigate();
@@ -13,27 +14,19 @@ export default function CartPage() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
 
-  const totals = useMemo(() => {
-    const subtotal = items.reduce(
-      (sum, it) => sum + Number(it.price) * it.quantity,
-      0
-    );
-    return { subtotal, grandTotal: subtotal };
-  }, [items]);
 
   const onSubmit = async () => {
     if (!items.length) return;
     setSubmitting(true);
     setError("");
     try {
-      // translate cart items -> API payload
+      // translate cart items to API payload
       const payload = {
         restaurant,
         items: items.map((i) => ({ menu_item: i.id, quantity: i.qty })),
       };
-      // POST /orders/
       const res = await createOrder(payload, token);
-      // Optionally: return res for a toast/snackbar in CheckoutBar
+      toast.success(`Order placed successfully! Order ID: ${res.order_id}`);
 
       clear();
       navigate("/orders", { state: { placed: true, order: res } });

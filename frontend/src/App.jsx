@@ -28,17 +28,6 @@ import {
   ProtectedLayout,
 } from "./Routes.js";
 
-// (Add these when ready)
-// import RestaurantsPage from "./pages/RestaurantsPage";
-// import MenuPage from "./pages/MenuPage";
-// import OrdersPage from "./pages/OrdersPage";
-
-// (Optional shared UI)
-// import TopBar from "./components/TopBar";
-// import CheckoutBar from "./components/CheckoutBar";
-
-
-
 export default function App() {
   return (
     <AuthProvider>
