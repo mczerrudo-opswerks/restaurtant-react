@@ -14,18 +14,16 @@ export default function RestaurantsPage() {
     let alive = true;
     (async () => {
       try {
-        const res = await api("/restaurants/", { token });
+        const res = await api(`/restaurants/?name__icontains=${q}`, { token });
         if (alive) setRestaurants(res.results || res);
       } finally {
         if (alive) setLoading(false);
       }
     })();
     return () => { alive = false; };
-  }, [token]);
+  }, [q, token]);
 
-  const filtered = restaurants.filter(r =>
-    r.name.toLowerCase().includes(q.toLowerCase())
-  );
+  const filtered = restaurants;
 
   return (
     <div className="max-w-5xl mx-auto p-4 space-y-4">

@@ -27,15 +27,7 @@ export default function OwnerRestaurant() {
   const [submitting, setSubmitting] = useState(false);
   const [msg, setMsg] = useState("");
 
-  const filtered = useMemo(() => {
-    const v = q.trim().toLowerCase();
-    if (!v) return items;
-    return items.filter(
-      (i) =>
-        (i.name || "").toLowerCase().includes(v) ||
-        (i.category || "").toLowerCase().includes(v)
-    );
-  }, [q, items]);
+  const filtered = items;
 
   useEffect(() => {
     let alive = true;
@@ -43,7 +35,7 @@ export default function OwnerRestaurant() {
       try {
         setLoading(true);
         const r = await api(`/restaurants/${id}/`, { token });
-        const m = await listMenuItems(id, token);
+        const m = await listMenuItems(id, token, q);
         if (!alive) return;
         setRestaurant(r);
         setItems(m);
@@ -58,6 +50,18 @@ export default function OwnerRestaurant() {
       alive = false;
     };
   }, [id, token]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const m = await listMenuItems(id, token, q);
+        setItems(m);
+      } catch (e) {
+        setError(e?.data?.detail || "Failed to load menu items");
+      } 
+    };
+    fetchData();
+  }, [q]);
 
   const startCreate = () => {
     setMode("create");
@@ -141,7 +145,7 @@ export default function OwnerRestaurant() {
             <div className="flex-1">
               <input
                 className="w-full border rounded px-3 py-2"
-                placeholder="Search by name or category…"
+                placeholder="Search by name"
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
               />

@@ -3,8 +3,8 @@ import { api } from "./client";
 
 
 // Menu items for a given restaurant
-export async function listMenuItems(restaurantId, token) {
-  const res = await api(`/menu_item/?restaurant=${restaurantId}`, { token });
+export async function listMenuItems(restaurantId, token, search = "") {
+  const res = await api(`/menu_item/?restaurant=${restaurantId}&search=${search}`, { token });
   return res.results || res || [];
 }
 
