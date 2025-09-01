@@ -1,14 +1,5 @@
-// src/pages/components/RestaurantForm.jsx
 import React, { useEffect, useState } from "react";
 
-/**
- * Reusable form for creating/updating a Restaurant.
- * Props:
- *  - initialValues: { name, address }
- *  - onSubmit: async (values) => void
- *  - onCancel: () => void
- *  - submitting: boolean
- */
 export default function RestaurantForm({ initialValues, onSubmit, onCancel, submitting }) {
   const [values, setValues] = useState({ name: "", address: "" });
 

@@ -1,16 +1,8 @@
-// src/routes/OwnerLayout.jsx
 import React, { useEffect, useState } from "react";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import TopBar from "../components/TopBar";
 import CheckoutBar from "../components/CheckoutBar"; // keep cart visible if you want
-import { api } from "../api/client";
 
-/**
- * OwnerLayout
- * - Ensures user is authenticated AND has owner privileges.
- * - If the user object doesn't yet have is_owner, it will lazily fetch /auth/me/.
- */
 export default function OwnerLayout() {
   const { token, getUserIdFromToken, user } = useAuth();
   const location = useLocation();
@@ -38,7 +30,6 @@ export default function OwnerLayout() {
         </div>
         <Outlet />
       </div>
-      <CheckoutBar onCheckout={null} />
     </div>
   );
 }

@@ -1,4 +1,3 @@
-// src/components/Modal.jsx
 import React, { useEffect } from "react";
 import { createPortal } from "react-dom";
 

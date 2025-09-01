@@ -1,14 +1,7 @@
-// src/pages/components/MenuItemForm.jsx
+
 import React, { useEffect, useState } from "react";
 
-/**
- * Reusable form for creating/updating a MenuItem.
- * Props:
- *  - initialValues: { name, description, price, category, is_available }
- *  - onSubmit: async (values) => void
- *  - onCancel: () => void
- *  - submitting: boolean
- */
+
 export default function MenuItemForm({ initialValues, onSubmit, onCancel, submitting }) {
   const [values, setValues] = useState({
     name: "",

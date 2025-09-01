@@ -1,4 +1,3 @@
-// src/api/owner.js
 import { api } from "./client";
 
 
@@ -21,8 +20,6 @@ export async function deleteMenuItem(id, token) {
   return api(`/menu_item/${id}/`, { method: "DELETE", token });
 }
 
-
-// -------------------- RESTAURANTS (owner scope) --------------------
 
 // List only the restaurants owned by the current user
 export async function getMyRestaurants(user, token) {

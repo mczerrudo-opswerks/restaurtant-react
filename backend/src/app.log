@@ -5350,3 +5350,25 @@ Traceback (most recent call last):
   File "/usr/local/lib/python3.13/site-packages/rest_framework/serializers.py", line 231, in is_valid
     raise ValidationError(self.errors)
 rest_framework.exceptions.ValidationError: {'username': [ErrorDetail(string='A user with that username already exists.', code='unique')], 'email': [ErrorDetail(string='Email already in use.', code='unique')]}
+[ERROR] 2025-09-01 05:59:57,371 restaurantAPI Unhandled exception in view=TokenObtainPairView user=None path=/api/token/ payload={'username': 'asdasd', 'password': 'asdsadasd'}
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/rest_framework_simplejwt/views.py", line 46, in post
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/rest_framework/serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/rest_framework/serializers.py", line 445, in run_validation
+    value = self.validate(value)
+  File "/usr/local/lib/python3.13/site-packages/rest_framework_simplejwt/serializers.py", line 73, in validate
+    data = super().validate(attrs)
+  File "/usr/local/lib/python3.13/site-packages/rest_framework_simplejwt/serializers.py", line 57, in validate
+    raise exceptions.AuthenticationFailed(
+    ...<2 lines>...
+    )
+rest_framework.exceptions.AuthenticationFailed: No active account found with the given credentials
+[INFO] 2025-09-01 06:21:56,436 restaurantAPI Restaurant created: beb157a4-bb42-4bf7-84cb-bde8a35e6422 by clareenz
+[INFO] 2025-09-01 06:22:25,108 restaurantAPI Restaurant created: 818b8b01-ad92-4605-a011-6f3b6490faec by clareenz
+[INFO] 2025-09-01 07:21:38,358 restaurantAPI Restaurant created: 21286a8e-4991-49ae-8842-7d03fbb10a04 by admin

@@ -54,11 +54,11 @@ export default function OrdersPage() {
         // orders (with current filters)
         const [ordersRes, restRes] = await Promise.all([
           api(`/orders/${buildQuery()}`, { token }),
-          api("/restaurants/?page_size=1000", { token }), // for dropdown
+          api("/restaurants/", { token }), // for dropdown
         ]);
         if (alive) {
-          setOrders(ordersRes?.results || ordersRes || []);
-          setRestaurants(restRes?.results || restRes || []);
+          setOrders(ordersRes || []);
+          setRestaurants(restRes || []);
         }
       } catch (e) {
         if (alive) setError(e?.data?.detail || "Failed to load orders");
@@ -69,7 +69,6 @@ export default function OrdersPage() {
     return () => {
       alive = false;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
   // refetch whenever filters change

@@ -1,4 +1,3 @@
-// src/api/owner.js
 import { api } from "./client";
 
 

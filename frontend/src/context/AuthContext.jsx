@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 import { api } from "../api/client";
-import {jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
 const AuthCtx = createContext(null);
 export function useAuth() {
@@ -31,11 +31,11 @@ export function AuthProvider({ children }) {
     setToken(data.access);
     localStorage.setItem("token", data.access);
 
-    const u = await api(`/user/${getUserIdFromToken(data.access)}`, { token: data.access });
+    const u = await api(`/user/${getUserIdFromToken(data.access)}`, {
+      token: data.access,
+    });
     setUser(u);
     localStorage.setItem("user", JSON.stringify(u));
-
-    
   };
 
   const logout = () => {
@@ -46,7 +46,9 @@ export function AuthProvider({ children }) {
   };
 
   return (
-    <AuthCtx.Provider value={{ token, user, login, logout, getUserIdFromToken}}>
+    <AuthCtx.Provider
+      value={{ token, user, login, logout, getUserIdFromToken }}
+    >
       {children}
     </AuthCtx.Provider>
   );
