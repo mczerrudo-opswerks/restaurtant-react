@@ -21,25 +21,30 @@ export default function RegisterPage() {
     last_name: "",
     password: "",
     password2: "",
+    is_restaurant_owner: false,
   });
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({}); // field-level errors from DRF
   const [nonFieldError, setNonFieldError] = useState("");
 
   const onChange = (e) => {
-    const { name, value } = e.target;
-    setValues((v) => ({ ...v, [name]: value }));
+    const { name, type, value, checked } = e.target;
+    setValues((v) => ({
+      ...v,
+      [name]: type === "checkbox" ? checked : value,
+    }));
   };
 
   const validateLocal = () => {
     const e = {};
-    if(!values.first_name) e.first_name = ["This field is required."];
-    if(!values.last_name) e.last_name = ["This field is required."];
+    if (!values.first_name) e.first_name = ["This field is required."];
+    if (!values.last_name) e.last_name = ["This field is required."];
     if (!values.username) e.username = ["This field is required."];
     if (!values.email) e.email = ["This field is required."];
     if (!values.password) e.password = ["This field is required."];
     if (values.password !== values.password2)
       e.password2 = ["Passwords do not match."];
+
     return e;
   };
 
@@ -59,9 +64,12 @@ export default function RegisterPage() {
     try {
       const res = await register(values, token);
       // Auto-login with the same credentials
-      toast.success(`Registration successful! Hi ${values.username} Logging you in…`, {
-        autoClose: 2000,
-      });
+      toast.success(
+        `Registration successful! Hi ${values.username} Logging you in…`,
+        {
+          autoClose: 2000,
+        }
+      );
       await login(values.username, values.password);
       navigate("/", { replace: true });
     } catch (e) {
@@ -169,6 +177,16 @@ export default function RegisterPage() {
             />
             <FieldError name="password2" />
           </div>
+
+          <label className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              name="is_restaurant_owner"
+              checked={values.is_restaurant_owner}
+              onChange={onChange}
+            />
+            I am a restaurant owner
+          </label>
 
           <button
             disabled={loading}
