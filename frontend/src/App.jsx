@@ -23,7 +23,10 @@ import {
   OwnerDashboard,
   OwnerLayout,
   OwnerRestaurant,
+  CartPage,
+  RegisterPage
 } from "./Routes.js";
+import { useNavigate } from "react-router-dom";
 // (Add these when ready)
 // import RestaurantsPage from "./pages/RestaurantsPage";
 // import MenuPage from "./pages/MenuPage";
@@ -34,6 +37,7 @@ import {
 // import CheckoutBar from "./components/CheckoutBar";
 
 function Protected() {
+  const navigate = useNavigate();
   const { token } = useAuth();
   const { items, restaurant, singleRestaurant } = useCart();
 
@@ -43,14 +47,16 @@ function Protected() {
     if (!singleRestaurant || items.length === 0) {
       throw "Cart must contain items from a single restaurant.";
     }
-    const payload = {
-      restaurant,
-      items: items.map((i) => ({ menu_item: i.id, quantity: i.qty })),
-    };
-    // POST /orders/
-    const res = await api("/orders/", { method: "POST", body: payload, token });
-    // Optionally: return res for a toast/snackbar in CheckoutBar
-    return res;
+    // const payload = {
+    //   restaurant,
+    //   items: items.map((i) => ({ menu_item: i.id, quantity: i.qty })),
+    // };
+    // // POST /orders/
+    // const res = await api("/orders/", { method: "POST", body: payload, token });
+    // // Optionally: return res for a toast/snackbar in CheckoutBar
+    // return res;
+    navigate("/cart", { replace: true });
+
   };
 
   return (
@@ -70,22 +76,24 @@ export default function App() {
           <Routes>
             {/* Public */}
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
 
             {/* Protected area */}
             <Route element={<Protected />}>
               <Route path="/" element={<RestaurantsPage />} />
               <Route path="/menu" element={<MenuPage />} />
               <Route path="/orders" element={<OrdersPage />} />
-            </Route>
+              <Route path="/cart" element={<CartPage />} />
 
-            {/* Owner area */}
-            <Route element={<OwnerLayout />}>
-              <Route path="/owner" element={<OwnerDashboard />} />
-              {/* Next step: */}
-              <Route
-                path="/owner/restaurants/:id"
-                element={<OwnerRestaurant />}
-              />
+              {/* Owner area */}
+              <Route element={<OwnerLayout />}>
+                <Route path="/owner" element={<OwnerDashboard />} />
+                {/* Next step: */}
+                <Route
+                  path="/owner/restaurants/:id"
+                  element={<OwnerRestaurant />}
+                />
+              </Route>
             </Route>
 
             {/* Fallback */}

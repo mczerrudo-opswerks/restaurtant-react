@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify"
-
+import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -59,6 +59,13 @@ export default function LoginPage() {
           >
             {loading ? "Signing in…" : "Sign in"}
           </button>
+          <div className="text-sm mt-4 text-center">
+            New here?{" "}
+
+            <Link to="/register" className="underline">
+              Create an account
+            </Link>
+          </div>
         </form>
       </div>
     </div>

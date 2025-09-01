@@ -29,7 +29,6 @@ export default function OwnerLayout() {
 
   return (
     <div className="min-h-screen pb-20">
-      <TopBar />
       <div className="max-w-5xl mx-auto px-4 py-4">
         <div className="mb-4 flex items-center gap-3 text-sm">
           <span className="font-medium">Owner</span>

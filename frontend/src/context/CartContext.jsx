@@ -28,6 +28,11 @@ export function CartProvider({ children }) {
     );
   };
 
+  const updateQty = (id, quantity) => {
+    if (quantity < 1) return;
+      setItems((items) => items.map((x) => (x.id === id ? { ...x, qty: quantity } : x)));
+  };
+
   const remove = (id) => setItems((prev) => prev.filter((p) => p.id !== id));
   const clear = () => setItems([]);
 
@@ -48,6 +53,7 @@ export function CartProvider({ children }) {
       total,
       restaurant,
       singleRestaurant,
+      updateQty
     }),
     [items, count, total, restaurant, singleRestaurant]
   );

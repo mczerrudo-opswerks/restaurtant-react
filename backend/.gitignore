@@ -1,0 +1,7 @@
+commands.txt
+__pycache__/
+*.py[cod]
+.env
+
+
+

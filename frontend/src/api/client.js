@@ -18,6 +18,7 @@ export async function api(path, { method = "GET", body, token } = {}) {
       // clear auth state
       localStorage.removeItem("token");
       localStorage.removeItem("user");
+
     }
     throw { status: res.status, data };
   }

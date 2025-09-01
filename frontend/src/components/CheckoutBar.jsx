@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useCart } from "../context/CartContext";
 
 export default function CheckoutBar({ onCheckout }) {
-  const { items, dec, clear, total, singleRestaurant } = useCart();
+  const { items, dec, clear, total, singleRestaurant} = useCart();
   const [msg, setMsg] = useState("");
 
   const handleCheckout = async () => {
@@ -10,8 +10,6 @@ export default function CheckoutBar({ onCheckout }) {
     try {
       setMsg("");
       await onCheckout();
-      setMsg("Order placed!");
-      clear();
     } catch (e) {
       console.log(e);
       setMsg(typeof e === "string" ? e : "Failed to checkout");

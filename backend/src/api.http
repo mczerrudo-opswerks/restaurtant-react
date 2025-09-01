@@ -4,11 +4,17 @@ Host: localhost:8000
 Content-Type: application/json
 
 {
-    "username": "customer1",
+    "username": "owner1",
     "password": "pass1234"
 }
 
 ###
+
+GET http://localhost:8000/menu_item/4/ HTTP/1.1
+Host: localhost:8000
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU2NDU5NzQ1LCJpYXQiOjE3NTY0NTYxNDUsImp0aSI6IjA1YWE0ZjI0OTRkYjQ3ZTE5YmQyZjRlNGJhYWYyODM5IiwidXNlcl9pZCI6IjQifQ.AiSkpdAXWimPchkz0qd2jK91ugdcxUuTivsvgjsn5tg
+
+##
 GET http://localhost:8000/user/5/ HTTP/1.1
 Host: localhost:8000
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU2NDUzMTcwLCJpYXQiOjE3NTY0NDk1NzAsImp0aSI6ImUyOWI1ODBiZWMxMjQ3NzBiZTgzOWY3MWUwNDVmZWVjIiwidXNlcl9pZCI6IjUifQ.i1jZK-Bl1oko7-2rRCkgaBQSaQ9jWQkfo4JTqJP3WPg

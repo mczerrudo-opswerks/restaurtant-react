@@ -3,6 +3,8 @@ from rest_framework import serializers
 from core.models import Restaurant, MenuItem, Order, OrderItem, Review
 from django.db import transaction
 from django.contrib.auth import get_user_model
+from rest_framework.validators import UniqueValidator
+from django.contrib.auth.password_validation import validate_password
 
 
 User = get_user_model()
@@ -11,6 +13,37 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ("id", "username", "email", "is_restaurant_owner")
+
+
+class RegisterSerializer(serializers.ModelSerializer):
+    # Optional: require unique email; drop this if your project doesn't enforce unique emails
+    email = serializers.EmailField(
+        required=False,
+        allow_blank=True,
+        validators=[UniqueValidator(queryset=User.objects.all(), message="Email already in use.")],
+    )
+    password = serializers.CharField(write_only=True, trim_whitespace=False)
+    password2 = serializers.CharField(write_only=True, trim_whitespace=False)
+
+    class Meta:
+        model = User
+        fields = ["username", "email", "first_name", "last_name", "password", "password2"]
+
+    def validate(self, attrs):
+        # passwords match
+        if attrs["password"] != attrs["password2"]:
+            raise serializers.ValidationError({"password2": "Passwords do not match."})
+        # run Django’s password validators
+        #validate_password(attrs["password"])
+        return attrs
+
+    def create(self, validated_data):
+        password = validated_data.pop("password")
+        validated_data.pop("password2", None)
+        user = User(**validated_data)
+        user.set_password(password)
+        user.save()
+        return user
 
 class MenuItemSerializer(serializers.ModelSerializer):
     # SerializerMethodField is read-only

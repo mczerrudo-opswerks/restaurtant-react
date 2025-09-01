@@ -61,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'silk.middleware.SilkyMiddleware',  # Optional: for better admin interface django-silk
+    'restaurantApi.middleware.NoCacheMiddleware', # Custom middleware to disable caching
 ]
 
 ROOT_URLCONF = 'restaurantApi.urls'
@@ -88,20 +89,19 @@ WSGI_APPLICATION = 'restaurantApi.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 # Load environment variables
-env = environ.Env()
-environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
-
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": env("DB_NAME"),
-        "USER": env("DB_USER"),
-        "PASSWORD": env("DB_PASSWORD"),
-        "HOST": env("DB_HOST", default="localhost"),
-        "PORT": env("DB_PORT", default="5432"),
+        "NAME": os.getenv("DB_NAME"),             # required → will be None if not set
+        "USER": os.getenv("DB_USER"),
+        "PASSWORD": os.getenv("DB_PASSWORD"),
+        "HOST": os.getenv("DB_HOST", "localhost"),  # fallback to localhost
+        "PORT": os.getenv("DB_PORT", "5432"),       # fallback to 5432
     }
 }
 
+env = environ.Env()
+environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 CORS_ALLOWED_ORIGINS = env.list("CORS_ALLOWED_ORIGINS", default=[])
 
 # drf-spectacular settings
@@ -181,12 +181,13 @@ SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }
+REDIS_URL = os.getenv("REDIS_URL")
 
 # CACHE Settings for Reddis
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/1",
+        "LOCATION": REDIS_URL,
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
@@ -194,9 +195,9 @@ CACHES = {
 }
 
 # Tell Celery where Redis is
-CELERY_BROKER_URL = "redis://127.0.0.1:6379/1"
+CELERY_BROKER_URL = REDIS_URL
 
-CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379/1"
+CELERY_RESULT_BACKEND = REDIS_URL
 
 # For testing purposes emails will be sent in the terminal
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"

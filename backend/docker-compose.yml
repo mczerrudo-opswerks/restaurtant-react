@@ -1,0 +1,62 @@
+name: restaurant
+
+
+services:
+  web:                  #Django App
+    build: .            #Find the Docker File in this Directory
+    container_name: django_app
+    ports:
+      - 8000:8000
+    volumes:
+      - ./src:/app
+    depends_on:
+      postgres:
+        condition: service_healthy
+        restart: true
+      redis:
+        condition: service_healthy
+    env_file: .env
+
+  worker:
+    build: .
+    command: celery -A restaurantApi worker -l info
+    env_file: .env
+    depends_on:
+      redis:
+        condition: service_healthy
+  
+  postgres:
+    image: postgres:17
+    container_name: postgres_db
+    volumes:
+      - postgres_db:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 10s
+
+  redis:
+    image: redis:8.2
+    # Optional: persist data (not needed for cache, but handy for dev)
+    volumes:
+      - redisdata:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    # Expose to host for debugging (optional)
+    ports:
+      - "6379:6379"
+
+  
+
+volumes:
+  postgres_db:
+  redisdata:

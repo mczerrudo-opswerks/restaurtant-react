@@ -11,6 +11,7 @@ from core.serializers import (
     OrderSerializer,
     ReviewSerializer,
     UserSerializer,
+    RegisterSerializer,
 )
 from rest_framework import permissions
 from core.tasks import send_order_created_email
@@ -24,10 +25,15 @@ logger = logging.getLogger('restaurantAPI')
 
 # Create your views here.
 
-class UserRetrieveAPIView(generics.RetrieveAPIView):
+class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [IsCurrentUser]
+
+    def get_serializer_class(self):
+        if self.action == "create" or self.action == "update": 
+            return RegisterSerializer
+        return super().get_serializer_class()
+
 
 class MenuItemListCreateAPIView(generics.ListCreateAPIView):
     """
