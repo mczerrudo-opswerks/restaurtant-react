@@ -5372,3 +5372,4 @@ rest_framework.exceptions.AuthenticationFailed: No active account found with the
 [INFO] 2025-09-01 06:21:56,436 restaurantAPI Restaurant created: beb157a4-bb42-4bf7-84cb-bde8a35e6422 by clareenz
 [INFO] 2025-09-01 06:22:25,108 restaurantAPI Restaurant created: 818b8b01-ad92-4605-a011-6f3b6490faec by clareenz
 [INFO] 2025-09-01 07:21:38,358 restaurantAPI Restaurant created: 21286a8e-4991-49ae-8842-7d03fbb10a04 by admin
+[INFO] 2025-09-01 08:46:13,424 restaurantAPI Restaurant created: opsewerk by owner2

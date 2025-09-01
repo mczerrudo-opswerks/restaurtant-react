@@ -51,7 +51,7 @@ class MenuItemSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = MenuItem
-        fields = ("id", "restaurant", "restaurant_name", "name", "price")
+        fields = ("id", "restaurant", "restaurant_name", "name", "price", "description", "category", "available")
 
     def get_restaurant_name(self, obj):
         return obj.restaurant.name

@@ -177,7 +177,7 @@ export default function OwnerRestaurant() {
                     <td className="p-3">{it.name}</td>
                     <td className="p-3">{it.category || "—"}</td>
                     <td className="p-3">₱{Number(it.price).toFixed(2)}</td>
-                    <td className="p-3">{it.is_available ? "Yes" : "No"}</td>
+                    <td className="p-3">{it.available ? "Yes" : "No"}</td>
                     <td className="p-3 text-right space-x-2">
                       <button
                         className="px-3 py-1 border rounded"

@@ -44,6 +44,11 @@ class MenuItem(models.Model):
     restaurant = models.ForeignKey(Restaurant, related_name="menu_items", on_delete=models.CASCADE)
     name = models.CharField(max_length=120)
     price = models.DecimalField(max_digits=8, decimal_places=2, validators=[MinValueValidator(Decimal("0.00"))])
+    description = models.TextField(blank=True)
+    category = models.CharField(max_length=100, blank=True)
+    available = models.BooleanField(default=False) 
+
+
 
     class Meta:
         # There can only be one name per restaurant

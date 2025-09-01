@@ -8,7 +8,7 @@ export default function MenuItemForm({ initialValues, onSubmit, onCancel, submit
     description: "",
     price: "",
     category: "",
-    is_available: true,
+    available: true,
   });
 
   useEffect(() => {
@@ -18,7 +18,7 @@ export default function MenuItemForm({ initialValues, onSubmit, onCancel, submit
         description: initialValues.description ?? "",
         price: initialValues.price ?? "",
         category: initialValues.category ?? "",
-        is_available: initialValues.is_available ?? true,
+        available: initialValues.available ?? true,
       });
     }
   }, [initialValues]);
@@ -89,8 +89,8 @@ export default function MenuItemForm({ initialValues, onSubmit, onCancel, submit
       <label className="inline-flex items-center gap-2 text-sm">
         <input
           type="checkbox"
-          name="is_available"
-          checked={values.is_available}
+          name="available"
+          checked={values.available}
           onChange={handleChange}
         />
         Available
